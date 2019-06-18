@@ -1,0 +1,24 @@
+{
+  "name": "expresso",
+  "version": "1.0.0",
+  "description": "Mimic the minimum features from Express JS",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --inspect",
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "javascript",
+    "node.js",
+    "express"
+  ],
+  "author": "Gustavo Morales",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.3",
+    "nodemon": "^1.19.1"
+  }
+}

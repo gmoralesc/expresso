@@ -1,0 +1,13 @@
+{
+  "terminal.integrated.fontSize": 20,
+  "editor.fontSize": 22,
+  "editor.renderWhitespace": "all",
+  "editor.renderControlCharacters": true,
+  "editor.tabSize": 2,
+  "editor.trimAutoWhitespace": true,
+  "editor.formatOnSave": true,
+  "files.insertFinalNewline": true,
+  "files.eol": "\n",
+  "prettier.trailingComma": "es5",
+  "prettier.eslintIntegration": true
+}
