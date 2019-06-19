@@ -9,8 +9,20 @@ module.exports = function expresso() {
     this.end(content);
   }
 
-  const app = function app(req, res) {
+  function json(content) {
+    this.setHeader('Content-Type', 'application/json');
+    this.end(JSON.stringify(content));
+  }
+
+  function status(code) {
+    this.statusCode = code;
+    return this;
+  }
+
+  const app = function next(req, res, start = 0) {
     res.send = send;
+    res.json = json;
+    res.status = status;
     // Extract URL
     const {
       method,
@@ -22,7 +34,7 @@ module.exports = function expresso() {
 
     // Match Route
     let index = -1;
-    for (let i = 0; i < middlewares.length; i += 1) {
+    for (let i = start; i < middlewares.length; i += 1) {
       if (middlewares[i].route) {
         if (middlewares[i].route === pathname && middlewares[i].method === method) {
           index = i;
@@ -38,7 +50,9 @@ module.exports = function expresso() {
       res.statusCode = 404;
       res.end('Not middleware Found');
     } else {
-      middlewares[index].callback(req, res);
+      middlewares[index].callback(req, res, () => {
+        next(req, res, index + 1);
+      });
     }
   };
 
