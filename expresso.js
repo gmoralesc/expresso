@@ -1,4 +1,20 @@
 const { parse } = require('url');
+const pathToRegexp = require('path-to-regexp');
+
+function extractQuery(querystring) {
+  const query = {};
+  querystring
+    .split('&')
+    .map(item => item.split('='))
+    .forEach((item) => {
+      const [name, value] = item;
+      Object.defineProperty(query, name, {
+        value,
+        enumerable: true,
+      });
+    });
+  return query;
+}
 
 module.exports = function expresso() {
   const middlewares = [];
@@ -23,7 +39,7 @@ module.exports = function expresso() {
     res.status = status;
     // Extract URL
     const { method, url } = req;
-    const { pathname } = parse(url);
+    const { pathname, query } = parse(url);
 
     // Match Route
     let index = -1;
@@ -34,9 +50,33 @@ module.exports = function expresso() {
           break;
         }
       } else if (middlewares[i].route) {
-        if (middlewares[i].route === pathname && middlewares[i].method === method) {
-          index = i;
-          break;
+        if (middlewares[i].method === method) {
+          if (middlewares[i].route === pathname) {
+            req.query = extractQuery(query || '');
+
+            index = i;
+            break;
+          } else {
+            const keys = [];
+            const regexp = pathToRegexp(middlewares[i].route, keys);
+            const values = regexp.exec(pathname) || [];
+
+            if (values.length > 0) {
+              const params = {};
+              keys.forEach((param, pos) => {
+                Object.defineProperty(params, param.name, {
+                  value: values[pos + 1],
+                  enumerable: true,
+                });
+              });
+              req.params = params;
+
+              req.query = extractQuery(query || '');
+
+              index = i;
+              break;
+            }
+          }
         }
       } else {
         index = i;
