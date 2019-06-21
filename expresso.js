@@ -66,6 +66,14 @@ module.exports = function expresso() {
     });
   };
 
+  app.post = (route, callback) => {
+    middlewares.push({
+      route,
+      callback,
+      method: 'POST',
+    });
+  };
+
   app.use = (callback) => {
     middlewares.push({
       callback,
