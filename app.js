@@ -1,7 +1,15 @@
 // const express = require('express');
+const bodyParser = require('body-parser');
+
 const express = require('./expresso');
 
 const app = express();
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   const id = 100;
@@ -19,6 +27,13 @@ app.get('/users', (req, res, next) => {
   res.json({
     message: 'User',
     id: req.id,
+  });
+});
+
+app.post('/users', (req, res, next) => {
+  const { id } = req.body;
+  res.json({
+    id,
   });
 });
 
