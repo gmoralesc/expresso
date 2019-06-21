@@ -11,10 +11,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-app.use((req, res, next) => {
-  const id = 100;
-  req.id = id;
+const auth = (req, res, next) => {
+  req.id = 42;
   next();
+};
+
+app.use(auth, (req, res, next) => {
+  if (!req.id) {
+    next(new Error('No user provided'));
+  } else {
+    next();
+  }
 });
 
 app.get('/', (req, res, next) => {

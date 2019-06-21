@@ -98,25 +98,33 @@ module.exports = function expresso() {
     }
   };
 
-  app.get = (route, callback) => {
-    middlewares.push({
-      route,
-      callback,
-      method: 'GET',
+  app.get = (...args) => {
+    const [route, ...callbacks] = args;
+    callbacks.forEach((callback) => {
+      middlewares.push({
+        route,
+        callback,
+        method: 'GET',
+      });
     });
   };
 
-  app.post = (route, callback) => {
-    middlewares.push({
-      route,
-      callback,
-      method: 'POST',
+  app.post = (...args) => {
+    const [route, ...callbacks] = args;
+    callbacks.forEach((callback) => {
+      middlewares.push({
+        route,
+        callback,
+        method: 'POST',
+      });
     });
   };
 
-  app.use = (callback) => {
-    middlewares.push({
-      callback,
+  app.use = (...callbacks) => {
+    callbacks.forEach((callback) => {
+      middlewares.push({
+        callback,
+      });
     });
   };
 

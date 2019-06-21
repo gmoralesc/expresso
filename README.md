@@ -8,6 +8,7 @@ Mimic the minimum features from Express JS
 - Functions: `next()`
 - Middleware: `app.use, Error middleware (must include next param)`
 - Support: [Body Parser](https://www.npmjs.com/package/body-parser)
+- Multiple middleware in the methods
 - Route String: Params and Querystring
 
 ## Todo
