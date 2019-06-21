@@ -1,6 +1,4 @@
-const {
-  parse,
-} = require('url');
+const { parse } = require('url');
 
 module.exports = function expresso() {
   const middlewares = [];
@@ -19,23 +17,23 @@ module.exports = function expresso() {
     return this;
   }
 
-  const app = function next(req, res, start = 0) {
+  const app = function next(req, res, start = 0, err = undefined) {
     res.send = send;
     res.json = json;
     res.status = status;
     // Extract URL
-    const {
-      method,
-      url,
-    } = req;
-    const {
-      pathname,
-    } = parse(url);
+    const { method, url } = req;
+    const { pathname } = parse(url);
 
     // Match Route
     let index = -1;
     for (let i = start; i < middlewares.length; i += 1) {
-      if (middlewares[i].route) {
+      if (err) {
+        if (middlewares[i].callback.length === 4) {
+          index = i;
+          break;
+        }
+      } else if (middlewares[i].route) {
         if (middlewares[i].route === pathname && middlewares[i].method === method) {
           index = i;
           break;
@@ -50,8 +48,12 @@ module.exports = function expresso() {
       res.statusCode = 404;
       res.end('Not middleware Found');
     } else {
-      middlewares[index].callback(req, res, () => {
-        next(req, res, index + 1);
+      const params = [req, res];
+      if (err) {
+        params.unshift(err);
+      }
+      middlewares[index].callback(...params, (error = undefined) => {
+        next(req, res, index + 1, error);
       });
     }
   };

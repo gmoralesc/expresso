@@ -9,24 +9,30 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/', (req, res) => res.send('Welcome API'));
-app.get('/users', (req, res) => {
+app.get('/', (req, res, next) => {
+  res.json({
+    message: 'Welcome API',
+  });
+});
+
+app.get('/users', (req, res, next) => {
   res.json({
     message: 'User',
     id: req.id,
   });
 });
 
-app.use((req, res) => {
+app.use((req, res, next) => {
   res.statusCode = 404;
   res.json({
     message: 'Route Not Found',
   });
 });
 
-app.use((err, req, res) => {
-  res.status(404).json({
-    message: 'Route Not Found',
+app.use((err, req, res, next) => {
+  const { message = '' } = err;
+  res.status(500).json({
+    message,
   });
 });
 
