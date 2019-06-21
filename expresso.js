@@ -1,4 +1,5 @@
 const { parse } = require('url');
+const pathToRegexp = require('path-to-regexp');
 
 module.exports = function expresso() {
   const middlewares = [];
@@ -34,9 +35,29 @@ module.exports = function expresso() {
           break;
         }
       } else if (middlewares[i].route) {
-        if (middlewares[i].route === pathname && middlewares[i].method === method) {
-          index = i;
-          break;
+        if (middlewares[i].method === method) {
+          if (middlewares[i].route === pathname) {
+            index = i;
+            break;
+          } else {
+            const keys = [];
+            const regexp = pathToRegexp(middlewares[i].route, keys);
+            const values = regexp.exec(pathname) || [];
+
+            if (values.length > 0) {
+              const params = {};
+              keys.forEach((param, pos) => {
+                Object.defineProperty(params, param.name, {
+                  value: values[pos + 1],
+                  enumerable: true,
+                });
+              });
+              req.params = params;
+
+              index = i;
+              break;
+            }
+          }
         }
       } else {
         index = i;

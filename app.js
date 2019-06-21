@@ -30,6 +30,13 @@ app.get('/users', (req, res, next) => {
   });
 });
 
+app.get('/users/:id', (req, res, next) => {
+  const { id } = req.params;
+  res.json({
+    id,
+  });
+});
+
 app.post('/users', (req, res, next) => {
   const { id } = req.body;
   res.json({
