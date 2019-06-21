@@ -24,9 +24,15 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/users', (req, res, next) => {
+  const { id } = req;
+  const { limit = 10, skip = 0 } = req.query;
   res.json({
-    message: 'User',
-    id: req.id,
+    name: 'User',
+    id,
+    meta: {
+      limit,
+      skip,
+    },
   });
 });
 

@@ -6,9 +6,13 @@ Mimic the minimum features from Express JS
 - Methods: `app.get, app.post, app.put, app.delete`
 - Helper functions: `send, json, status`
 - Functions: `next()`
-- Middleware: `app.use, Error middleware`
+- Middleware: `app.use, Error middleware (must include next param)`
 - Support: [Body Parser](https://www.npmjs.com/package/body-parser)
-- Constraint: Exact Route Match
+- Route String: Params and Querystring
+
+## Todo
+
+- Router object
 
 ## Requirements
 

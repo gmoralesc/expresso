@@ -1,6 +1,21 @@
 const { parse } = require('url');
 const pathToRegexp = require('path-to-regexp');
 
+function extractQuery(querystring) {
+  const query = {};
+  querystring
+    .split('&')
+    .map(item => item.split('='))
+    .forEach((item) => {
+      const [name, value] = item;
+      Object.defineProperty(query, name, {
+        value,
+        enumerable: true,
+      });
+    });
+  return query;
+}
+
 module.exports = function expresso() {
   const middlewares = [];
 
@@ -24,7 +39,7 @@ module.exports = function expresso() {
     res.status = status;
     // Extract URL
     const { method, url } = req;
-    const { pathname } = parse(url);
+    const { pathname, query } = parse(url);
 
     // Match Route
     let index = -1;
@@ -37,6 +52,8 @@ module.exports = function expresso() {
       } else if (middlewares[i].route) {
         if (middlewares[i].method === method) {
           if (middlewares[i].route === pathname) {
+            req.query = extractQuery(query || '');
+
             index = i;
             break;
           } else {
@@ -53,6 +70,8 @@ module.exports = function expresso() {
                 });
               });
               req.params = params;
+
+              req.query = extractQuery(query || '');
 
               index = i;
               break;
