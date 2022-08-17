@@ -1,6 +1,6 @@
 {
   "name": "expresso",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Mimic the minimum features from Express JS",
   "main": "index.js",
   "scripts": {
@@ -16,14 +16,15 @@
   "author": "Gustavo Morales",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.3",
-    "nodemon": "^1.19.1"
+    "eslint": "^8.22.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.26.0",
+    "nodemon": "^2.0.19"
   },
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "path-to-regexp": "^3.0.0"
-  }
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "path-to-regexp": "^6.2.1"
+  },
+  "type": "module"
 }

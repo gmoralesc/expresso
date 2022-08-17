@@ -1,11 +1,11 @@
-const { parse } = require('url');
-const pathToRegexp = require('path-to-regexp');
+import { parse } from 'url';
+import { pathToRegexp } from 'path-to-regexp';
 
 function extractQuery(querystring) {
   const query = {};
   querystring
     .split('&')
-    .map(item => item.split('='))
+    .map((item) => item.split('='))
     .forEach((item) => {
       const [name, value] = item;
       Object.defineProperty(query, name, {
@@ -16,7 +16,7 @@ function extractQuery(querystring) {
   return query;
 }
 
-module.exports = function expresso() {
+export default function expresso() {
   const middlewares = [];
 
   function send(content) {
@@ -129,4 +129,4 @@ module.exports = function expresso() {
   };
 
   return app;
-};
+}

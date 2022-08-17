@@ -1,15 +1,11 @@
-// const express = require('express');
-const bodyParser = require('body-parser');
+import express from 'express';
 
-const express = require('./expresso');
+import expresso from './expresso.js';
 
-const app = express();
-
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+const app = expresso();
 
 // parse application/json
-app.use(bodyParser.json());
+app.use(express.json());
 
 const auth = (req, res, next) => {
   req.id = 42;
@@ -71,4 +67,4 @@ app.use((err, req, res, next) => {
   });
 });
 
-module.exports = app;
+export default app;

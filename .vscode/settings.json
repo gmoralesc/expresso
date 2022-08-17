@@ -7,7 +7,5 @@
   "editor.trimAutoWhitespace": true,
   "editor.formatOnSave": true,
   "files.insertFinalNewline": true,
-  "files.eol": "\n",
-  "prettier.trailingComma": "es5",
-  "prettier.eslintIntegration": true
+  "prettier.trailingComma": "es5"
 }

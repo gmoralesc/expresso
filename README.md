@@ -3,7 +3,7 @@
 Mimic the minimum features from Express JS
 
 - App constructor: `express()`
-- Methods: `app.get, app.post, app.put, app.delete`
+- Methods: `app.get, app.post, app.put, app.patch, app.delete`
 - Helper functions: `send, json, status`
 - Functions: `next()`
 - Middleware: `app.use, Error middleware (must include next param)`
@@ -17,8 +17,8 @@ Mimic the minimum features from Express JS
 
 ## Requirements
 
-- Node.js >= 8.x
-- npm >= 5.x
+- Node.js >= 18.x
+- npm >= 8.x
 
 ## Installation
 

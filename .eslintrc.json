@@ -1,16 +1,13 @@
 {
   "env": {
-    "commonjs": true,
-    "es6": true,
+    "es2021": true,
     "node": true
   },
-  "extends": "airbnb-base",
-  "globals": {
-    "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
-  },
+  "extends": "google",
+  "overrides": [],
   "parserOptions": {
-    "ecmaVersion": 2018
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   },
   "rules": {
     "no-console": "off",
@@ -19,6 +16,7 @@
       {
         "argsIgnorePattern": "next"
       }
-    ]
+    ],
+    "import/extensions": ["js"]
   }
 }

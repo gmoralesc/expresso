@@ -1,6 +1,6 @@
-const http = require('http');
+import http from 'http';
 
-const app = require('./app');
+import app from './app.js';
 
 const hostname = '127.0.0.1';
 const port = 3000;
