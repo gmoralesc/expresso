@@ -7,13 +7,9 @@ Mimic the minimum features from Express JS
 - Helper functions: `send, json, status`
 - Functions: `next()`
 - Middleware: `app.use, Error middleware (must include next param)`
-- Support: [Body Parser](https://www.npmjs.com/package/body-parser)
+- Support: [Body Parser](https://www.npmjs.com/package/body-parser) or `express.json()` to parse JSON
 - Multiple middleware in the methods
 - Route String: Params and Querystring
-
-## Todo
-
-- Router object
 
 ## Requirements
 
@@ -23,6 +19,19 @@ Mimic the minimum features from Express JS
 ## Installation
 
 1. `git clone https://github.com/gmoralesc/expresso`
+2. `cd expresso`
+3. `npm install`
+4. `npm run dev`
+5. Base url: `http://localhost:3000`
+
+## Configuration
+
+Create a enviroment variable call PORT to override the default
+port value 3000
+
+## Development
+
+1. `git clone https://github.com/gmoralesc/expresso --branch develop`
 2. `cd expresso`
 3. `npm install`
 4. `npm run dev`

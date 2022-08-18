@@ -1,12 +1,13 @@
 import http from 'http';
 
-import app from './app.js';
+const port = process.env.PORT || 3000;
 
-const hostname = '127.0.0.1';
-const port = 3000;
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello, World!\n');
+});
 
-const server = http.createServer(app);
-
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+server.listen(port, () => {
+  console.log(`Server running at port: ${port}`);
 });

@@ -4,9 +4,9 @@
   "description": "Mimic the minimum features from Express JS",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --inspect",
-    "start": "node index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "NODE_ENV=development nodemon --inspect",
+    "start": "NODE_ENV=production node index",
+    "test": "NODE_ENV=test jest"
   },
   "keywords": [
     "javascript",
@@ -19,7 +19,9 @@
     "eslint": "^8.22.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.26.0",
-    "nodemon": "^2.0.19"
+    "jest": "^28.1.3",
+    "nodemon": "^2.0.19",
+    "supertest": "^6.2.4"
   },
   "dependencies": {
     "body-parser": "^1.20.0",
