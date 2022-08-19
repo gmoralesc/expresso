@@ -6,7 +6,7 @@ Mimic the minimum features from Express JS
 - Methods: `app.get, app.post, app.put, app.patch, app.delete`
 - Helper functions: `send, json, status`
 - Functions: `next()`
-- Middleware: `app.use, Error middleware (must include next param)`
+- Middleware: `app.use, Error middleware (must include next param 4 in total)`
 - Support: [Body Parser](https://www.npmjs.com/package/body-parser) or `express.json()` to parse JSON
 - Multiple middleware in the methods
 - Route String: Params and Querystring
@@ -36,6 +36,10 @@ port value 3000
 3. `npm install`
 4. `npm run dev`
 5. Base url: `http://localhost:3000`
+
+## Test
+
+`npm test`
 
 ## Visual Studio Code Extensions
 
